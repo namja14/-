@@ -20,11 +20,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'd=g_*+fqur@!@(ftp0cp8vnj)qcjw4xi%gk+63)c&3=v^peta_'
+#SECRET_KEY = d=g_*+fqur@!@(ftp0cp8vnj)qcjw4xi%gk+63)c&3=v^peta_
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY','d=g_*+fqur@!@(ftp0cp8vnj)qcjw4xi%gk+63)c&3=v^peta_')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
+#DEBUG = True
+DEBUG = bool(os.environ.get('DJANGO_DEBUG',TRUE))
 ALLOWED_HOSTS = []
 
 
@@ -39,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'blog1.apps.Blog1Config',
     'portfolio.apps.PortfolioConfig',
+    'accounts.apps.AccountsConfig',
 ]
 
 MIDDLEWARE = [
@@ -56,7 +58,7 @@ ROOT_URLCONF = 'blogproject.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ["blogproject/templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
